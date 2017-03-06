@@ -49,21 +49,19 @@ namespace ChromeHistoryReader
 					}
 				}
 			}
-			catch (SqliteException ex)
+			catch (SqliteException)
 			{
-				throw new Exception("Cannot access to history file, please close Google Chrome browser.");
+				NotificationSender.ShowMessage("Cannot access to history file, please close Google Chrome browser.");
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-
+				NotificationSender.ShowMessage("An unexpected error appeared.");
 			}
-
 			return result;
 		}
 
 		public void DeleteHistoryItem(int id)
 		{
-
 			var filePath = GetHistoryFilePath();
 
 			using (var conn = new SqliteConnection("Version=3,uri=file:" + filePath))

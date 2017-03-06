@@ -101,7 +101,7 @@ namespace ChromeHistoryReader
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1155, 596);
 			this.Controls.Add(this.tableLayoutPanel1);
-			this.Name = "Google Chrome history reader";
+			this.Name = "Form1";
 			this.Text = "Google Chrome history reader";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

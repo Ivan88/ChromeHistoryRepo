@@ -28,7 +28,7 @@ namespace ChromeHistoryReader
 				e.Exception != null &&
 				!String.IsNullOrEmpty(e.Exception.Message))
 			{
-				MessageBox.Show(e.Exception.Message, "An error!");
+				NotificationSender.ShowMessage(e.Exception.Message);
 			}
 		}
 	}

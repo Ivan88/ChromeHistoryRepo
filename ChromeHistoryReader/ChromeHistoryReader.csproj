@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="HistoryDataProvider.cs" />
     <Compile Include="HistoryRecord.cs" />
+    <Compile Include="NotificationSender.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
