@@ -94,6 +94,10 @@ namespace ChromeHistoryReader
 			this.dataGridView1.Columns[3].ReadOnly = true;
 			this.dataGridView1.Columns[3].DataPropertyName = "VisitedDate";
 			this.dataGridView1.Columns[3].Width = 120;
+			this.dataGridView1.MouseDown += dataGridView1_MouseDown;
+
+			this.ContextMenu.MenuItems.Add(new MenuItem("Delete"));
+			this.ContextMenu.MenuItems[0].Click += Form1_Click;
 			// 
 			// Form1
 			// 

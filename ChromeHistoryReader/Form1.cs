@@ -41,5 +41,25 @@ namespace ChromeHistoryReader
 				}
 			}
 		}
+
+		private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button == System.Windows.Forms.MouseButtons.Right)
+			{
+				var hti = dataGridView1.HitTest(e.X, e.Y);
+				dataGridView1.ClearSelection();
+				if (dataGridView1.Rows.Count > 0 && hti.RowIndex >= 0)
+				{
+					dataGridView1.Rows[hti.RowIndex].Selected = true;
+
+					this.ContextMenu.Show(dataGridView1, new Point(e.X, e.Y));
+				}
+			}
+		}
+
+		void Form1_Click(object sender, System.EventArgs e)
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }
