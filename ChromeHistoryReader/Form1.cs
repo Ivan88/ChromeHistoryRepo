@@ -22,7 +22,7 @@ namespace ChromeHistoryReader
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			var records = _dataProvider.GetHistoryRecords().ToArray();
+			var records = _dataProvider.GetHistoryRecords();
 			dataGridView1.DataSource = records;
 		}
 
@@ -39,9 +39,6 @@ namespace ChromeHistoryReader
 				{
 					m.MenuItems.Add(new MenuItem(string.Format("Do something to row {0}", currentMouseOverRow.ToString())));
 				}
-
-				//m.Show(dataGridView1, new Point(e.X, e.Y));
-
 			}
 		}
 	}

@@ -24,10 +24,12 @@ namespace ChromeHistoryReader
 
 		private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
 		{
-			//if (e.Exception.GetType() == typeof(SQLiteException) && e.Exception.Message.Contains("database is locked"))
-			//{
-			//	MessageBox.Show("Please, close Google Chrome browser.", "An error!");
-			//}
+			if (e != null &&
+				e.Exception != null &&
+				!String.IsNullOrEmpty(e.Exception.Message))
+			{
+				MessageBox.Show(e.Exception.Message, "An error!");
+			}
 		}
 	}
 }

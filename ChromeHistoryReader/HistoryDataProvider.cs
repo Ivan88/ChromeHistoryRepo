@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 
 namespace ChromeHistoryReader
 {
@@ -13,11 +14,11 @@ namespace ChromeHistoryReader
 		public IEnumerable<HistoryRecord> GetHistoryRecords()
 		{
 			var result = new List<HistoryRecord>();
-			var chromeHistoryFile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Google\Chrome\User Data\Default\History";
+			var filePath = GetHistoryFilePath();
 
-			if (File.Exists(chromeHistoryFile))
+			try
 			{
-				using (var conn = new SqliteConnection("Version=3,uri=file:" + chromeHistoryFile))
+				using (var conn = new SqliteConnection("Version=3,uri=file:" + filePath))
 				{
 					conn.Open();
 					using (var command = new SqliteCommand(sqlCommandText, conn))
@@ -48,32 +49,50 @@ namespace ChromeHistoryReader
 					}
 				}
 			}
+			catch (SqliteException ex)
+			{
+				throw new Exception("Cannot access to history file, please close Google Chrome browser.");
+			}
+			catch (Exception ex)
+			{
+
+			}
 
 			return result;
 		}
 
 		public void DeleteHistoryItem(int id)
 		{
-			var chromeHistoryFile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Google\Chrome\User Data\Default\History";
 
-			if (File.Exists(chromeHistoryFile))
+			var filePath = GetHistoryFilePath();
+
+			using (var conn = new SqliteConnection("Version=3,uri=file:" + filePath))
 			{
-				using (var conn = new SqliteConnection("Version=3,uri=file:" + chromeHistoryFile))
+				conn.Open();
+				var text = deleteCommandText + id.ToString() + ";";
+				using (var command = new SqliteCommand())
 				{
-					conn.Open();
-					var text = deleteCommandText + id.ToString() + ";";
-					using (var command = new SqliteCommand())
-					{
-						var trans = conn.BeginTransaction();
-						command.Connection = conn;
-						command.CommandText = deleteCommandText;
-						command.Parameters.Add(new SqliteParameter("@id", id));
-						command.ExecuteNonQuery();
-						trans.Commit();
-					}
-					conn.Close();
+					var trans = conn.BeginTransaction();
+					command.Connection = conn;
+					command.CommandText = deleteCommandText;
+					command.Parameters.Add(new SqliteParameter("@id", id));
+					command.ExecuteNonQuery();
+					trans.Commit();
 				}
+				conn.Close();
 			}
 		}
+
+		private string GetHistoryFilePath()
+		{
+			var chromeHistoryFile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Google\Chrome\User Data\Default\History";
+
+			if (!File.Exists(chromeHistoryFile))
+			{
+				throw new Exception("Chrome history was not found on your computer. It seems like you did not install Google Chrome browser.");
+			}
+
+			return chromeHistoryFile;
+		}
 	}
-}
+	}

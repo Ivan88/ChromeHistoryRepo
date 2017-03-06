@@ -1,4 +1,5 @@
-﻿namespace ChromeHistoryReader
+﻿using System.Windows.Forms;
+namespace ChromeHistoryReader
 {
 	partial class Form1
 	{
@@ -75,6 +76,24 @@
 			this.dataGridView1.Size = new System.Drawing.Size(1125, 531);
 			this.dataGridView1.TabIndex = 1;
 			this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
+			this.dataGridView1.Columns.Add("Id", "Id");
+			this.dataGridView1.Columns[0].ReadOnly = true;
+			this.dataGridView1.Columns[0].Visible = false;
+			this.dataGridView1.Columns[0].DataPropertyName = "Id";
+			this.dataGridView1.Columns.Add("Url", "Url");
+			this.dataGridView1.Columns[1].ReadOnly = true;
+			this.dataGridView1.Columns[1].DataPropertyName = "Url";
+			this.dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridView1.Columns[1].FillWeight = 40;
+			this.dataGridView1.Columns.Add("Title", "Title");
+			this.dataGridView1.Columns[2].ReadOnly = true;
+			this.dataGridView1.Columns[2].DataPropertyName = "Title";
+			this.dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+			this.dataGridView1.Columns[2].FillWeight = 30;
+			this.dataGridView1.Columns.Add("VisitDate", "Visited Date");
+			this.dataGridView1.Columns[3].ReadOnly = true;
+			this.dataGridView1.Columns[3].DataPropertyName = "VisitedDate";
+			this.dataGridView1.Columns[3].Width = 120;
 			// 
 			// Form1
 			// 
@@ -82,8 +101,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1155, 596);
 			this.Controls.Add(this.tableLayoutPanel1);
-			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Name = "Google Chrome history reader";
+			this.Text = "Google Chrome history reader";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
