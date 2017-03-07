@@ -59,6 +59,7 @@ namespace ChromeHistoryReader
 
 		void Form1_Click(object sender, System.EventArgs e)
 		{
+			
 			throw new System.NotImplementedException();
 		}
 	}

@@ -12,5 +12,7 @@ namespace ChromeHistoryReader
 		public string Url { get; set; }
 		public string Title { get; set; }
 		public DateTime VisitedDate { get; set; }
+		public int VisitedCount { get; set; }
+		public int TypedCount { get; set; }
 	}
 }
