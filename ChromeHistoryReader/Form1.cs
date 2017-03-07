@@ -13,17 +13,19 @@ namespace ChromeHistoryReader
 	public partial class Form1 : Form
 	{
 		private HistoryDataProvider _dataProvider;
+		private BindingSource _source;
 
 		public Form1(HistoryDataProvider dataProvider)
 		{
 			this._dataProvider = dataProvider;
+			_source = new BindingSource();
 			InitializeComponent();
+			this.dataGridView1.DataSource = _source;
 		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			var records = _dataProvider.GetHistoryRecords();
-			dataGridView1.DataSource = records;
+			RefreshContent();
 		}
 
 		private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -34,11 +36,6 @@ namespace ChromeHistoryReader
 				m.MenuItems.Add(new MenuItem("Delete"));
 
 				int currentMouseOverRow = dataGridView1.HitTest(e.X, e.Y).RowIndex;
-
-				if (currentMouseOverRow >= 0)
-				{
-					m.MenuItems.Add(new MenuItem(string.Format("Do something to row {0}", currentMouseOverRow.ToString())));
-				}
 			}
 		}
 
@@ -57,10 +54,22 @@ namespace ChromeHistoryReader
 			}
 		}
 
-		void Form1_Click(object sender, System.EventArgs e)
+		private void Form1_Click(object sender, System.EventArgs e)
 		{
-			
-			throw new System.NotImplementedException();
+			var rowToDelete = this.dataGridView1.Rows.GetFirstRow(DataGridViewElementStates.Selected);
+			var item = (HistoryRecord)dataGridView1.Rows[rowToDelete].DataBoundItem;
+			var rowWasDeleted = _dataProvider.DeleteHistoryItem(item.Id);
+			if (rowWasDeleted)
+			{
+				_source.RemoveAt(rowToDelete);
+			}
+		}
+
+		private async void RefreshContent()
+		{
+			var records = await _dataProvider.GetHistoryRecords();
+			_source.DataSource = records;
+			this.dataGridView1.ClearSelection();
 		}
 	}
 }

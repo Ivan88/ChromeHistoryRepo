@@ -94,8 +94,19 @@ namespace ChromeHistoryReader
 			this.dataGridView1.Columns[3].ReadOnly = true;
 			this.dataGridView1.Columns[3].DataPropertyName = "VisitedDate";
 			this.dataGridView1.Columns[3].Width = 120;
-			this.dataGridView1.MouseDown += dataGridView1_MouseDown;
+			this.dataGridView1.Columns.Add("VisitCount", "Visit Count");
+			this.dataGridView1.Columns[4].ReadOnly = true;
+			this.dataGridView1.Columns[4].DataPropertyName = "VisitCount";
+			this.dataGridView1.Columns[4].Width = 120;
+			this.dataGridView1.Columns.Add("TypedCount", "Typed Count");
+			this.dataGridView1.Columns[5].ReadOnly = true;
+			this.dataGridView1.Columns[5].DataPropertyName = "TypedCount";
+			this.dataGridView1.Columns[5].Width = 120;
 
+			this.dataGridView1.MouseDown += dataGridView1_MouseDown;
+			this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+			this.ContextMenu = new ContextMenu();
 			this.ContextMenu.MenuItems.Add(new MenuItem("Delete"));
 			this.ContextMenu.MenuItems[0].Click += Form1_Click;
 			// 
@@ -106,7 +117,7 @@ namespace ChromeHistoryReader
 			this.ClientSize = new System.Drawing.Size(1155, 596);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "Form1";
-			this.Text = "Google Chrome history reader";
+			this.Text = "Google Chrome History Viewer";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
