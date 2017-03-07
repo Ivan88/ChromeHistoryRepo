@@ -87,7 +87,6 @@ namespace ChromeHistoryReader
 						command.ExecuteNonQuery();
 						trans.Commit();
 					}
-					conn.Close();
 				}
 				return true;
 			}
