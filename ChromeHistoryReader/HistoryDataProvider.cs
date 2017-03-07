@@ -58,7 +58,7 @@ namespace ChromeHistoryReader
 				}
 				catch (SqliteException)
 				{
-					NotificationSender.ShowMessage("Cannot access the file whis Chrome history, please close Google Chrome browser.");
+					NotificationSender.ShowMessage("Cannot access the file with Chrome history, please close Google Chrome browser.");
 				}
 				catch (Exception)
 				{

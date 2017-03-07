@@ -63,6 +63,7 @@ namespace ChromeHistoryReader
 			{
 				_source.RemoveAt(rowToDelete);
 			}
+			this.dataGridView1.ClearSelection();
 		}
 
 		private async void RefreshContent()
