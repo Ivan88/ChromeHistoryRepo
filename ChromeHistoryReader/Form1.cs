@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ChromeHistoryReader
@@ -28,20 +22,9 @@ namespace ChromeHistoryReader
 			RefreshContent();
 		}
 
-		private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-		{
-			if (e.Button == MouseButtons.Right)
-			{
-				ContextMenu m = new ContextMenu();
-				m.MenuItems.Add(new MenuItem("Delete"));
-
-				int currentMouseOverRow = dataGridView1.HitTest(e.X, e.Y).RowIndex;
-			}
-		}
-
 		private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (e.Button == System.Windows.Forms.MouseButtons.Right)
+			if (e.Button == MouseButtons.Right)
 			{
 				var hti = dataGridView1.HitTest(e.X, e.Y);
 				dataGridView1.ClearSelection();
@@ -49,19 +32,23 @@ namespace ChromeHistoryReader
 				{
 					dataGridView1.Rows[hti.RowIndex].Selected = true;
 
-					this.ContextMenu.Show(dataGridView1, new Point(e.X, e.Y));
+					this.dataGridView1.ContextMenu.Show(dataGridView1, new Point(e.X, e.Y));
 				}
 			}
 		}
 
-		private void Form1_Click(object sender, System.EventArgs e)
+		private void MenuItem_Click(object sender, EventArgs e)
 		{
 			var rowToDelete = this.dataGridView1.Rows.GetFirstRow(DataGridViewElementStates.Selected);
 			var item = (HistoryRecord)dataGridView1.Rows[rowToDelete].DataBoundItem;
-			var rowWasDeleted = _dataProvider.DeleteHistoryItem(item.Id);
-			if (rowWasDeleted)
+
+			if (item != null)
 			{
-				_source.RemoveAt(rowToDelete);
+				var rowWasDeleted = _dataProvider.DeleteHistoryItem(item.Id);
+				if (rowWasDeleted)
+				{
+					_source.RemoveAt(rowToDelete);
+				}
 			}
 			this.dataGridView1.ClearSelection();
 		}

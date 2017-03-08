@@ -31,9 +31,9 @@ namespace ChromeHistoryReader
 		{
 			this.components = new System.ComponentModel.Container();
 
-			this.button1 = new System.Windows.Forms.Button();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.button1 = new Button();
+			this.tableLayoutPanel1 = new TableLayoutPanel();
+			this.dataGridView1 = new DataGridView();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
@@ -50,32 +50,27 @@ namespace ChromeHistoryReader
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			| System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.tableLayoutPanel1.Anchor = (((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
 			this.tableLayoutPanel1.ColumnCount = 1;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
 			this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 1);
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95F));
+			this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
+			this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 95F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(1131, 572);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// dataGridView1
 			// 
-			this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			| System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataGridView1.Anchor = (((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+			this.dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Location = new System.Drawing.Point(3, 38);
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.Size = new System.Drawing.Size(1125, 531);
 			this.dataGridView1.TabIndex = 1;
-			this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
 			this.dataGridView1.Columns.Add("Id", "Id");
 			this.dataGridView1.Columns[0].ReadOnly = true;
 			this.dataGridView1.Columns[0].Visible = false;
@@ -106,14 +101,14 @@ namespace ChromeHistoryReader
 			this.dataGridView1.MouseDown += dataGridView1_MouseDown;
 			this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-			this.ContextMenu = new ContextMenu();
-			this.ContextMenu.MenuItems.Add(new MenuItem("Delete"));
-			this.ContextMenu.MenuItems[0].Click += Form1_Click;
+			this.dataGridView1.ContextMenu = new ContextMenu();
+			this.dataGridView1.ContextMenu.MenuItems.Add(new MenuItem("Delete"));
+			this.dataGridView1.ContextMenu.MenuItems[0].Click += MenuItem_Click;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScaleMode = AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1155, 596);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "Form1";
@@ -125,9 +120,9 @@ namespace ChromeHistoryReader
 
 		#endregion
 
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private Button button1;
+		private TableLayoutPanel tableLayoutPanel1;
+		private DataGridView dataGridView1;
 	}
 }
 
