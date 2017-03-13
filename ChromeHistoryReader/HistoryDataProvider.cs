@@ -8,15 +8,17 @@ namespace ChromeHistoryReader
 {
 	public class HistoryDataProvider
 	{
+		#region Chrome history methods
+
 		private const string sqlCommandText = "select * from urls order by last_visit_time desc";
 		private const string deleteCommandText = "delete from 'urls' where id = @id";
 
-		public Task<BindingList<HistoryRecord>> GetHistoryRecords()
+		public Task<BindingList<HistoryRecord>> GetChromeHistoryRecords()
 		{
 			return Task.Run<BindingList<HistoryRecord>>(() =>
 			{
 				var result = new BindingList<HistoryRecord>();
-				var filePath = GetHistoryFilePath();
+				var filePath = GetChromeHistoryFilePath();
 
 				try
 				{
@@ -65,9 +67,9 @@ namespace ChromeHistoryReader
 			});
 		}
 
-		public bool DeleteHistoryItem(int id)
+		public bool DeleteChromeHistoryItem(int id)
 		{
-			var filePath = GetHistoryFilePath();
+			var filePath = GetChromeHistoryFilePath();
 
 			try
 			{
@@ -94,7 +96,7 @@ namespace ChromeHistoryReader
 			}
 		}
 
-		private string GetHistoryFilePath()
+		private string GetChromeHistoryFilePath()
 		{
 			var chromeHistoryFile = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Google\Chrome\User Data\Default\History";
 
@@ -105,5 +107,7 @@ namespace ChromeHistoryReader
 
 			return chromeHistoryFile;
 		}
+
+		#endregion
 	}
 }

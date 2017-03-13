@@ -44,7 +44,7 @@ namespace ChromeHistoryReader
 
 			if (item != null)
 			{
-				var rowWasDeleted = _dataProvider.DeleteHistoryItem(item.Id);
+				var rowWasDeleted = _dataProvider.DeleteChromeHistoryItem(item.Id);
 				if (rowWasDeleted)
 				{
 					_source.RemoveAt(rowToDelete);
@@ -55,7 +55,7 @@ namespace ChromeHistoryReader
 
 		private async void RefreshContent()
 		{
-			var records = await _dataProvider.GetHistoryRecords();
+			var records = await _dataProvider.GetChromeHistoryRecords();
 			_source.DataSource = records;
 			this.dataGridView1.ClearSelection();
 		}
